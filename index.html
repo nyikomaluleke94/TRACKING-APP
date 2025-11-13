@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barrier Blueprint Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="chatbot.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Animate.css for advanced animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <img src="Logo.jpeg" alt="Simply Complex Africa Logo" class="logo-image" />
+        <div class="logo-text">
+          <h2>Barrier</h2>
+          <p>Blueprint Tracker</p>
+        </div>
+      </div>
+
+      <ul class="nav">
+        <li class="active" data-page="dashboard">
+          <span class="icon">🏠</span> Dashboard
+        </li>
+        <li data-page="idea-repo">
+          <span class="icon">💡</span> Idea Repository
+        </li>
+        <li data-page="ai-insights">
+          <span class="icon">🤖</span> AI Insights
+        </li>
+        <li data-page="stakeholder-map">
+          <span class="icon">🗺️</span> Stakeholder Map
+        </li>
+        <li data-page="export-report">
+          <span class="icon">📊</span> Export Report
+        </li>
+      </ul>
+      
+      <!-- AI Assistant Mini Widget -->
+      <div class="ai-sidebar-widget">
+        <div class="ai-pulse"></div>
+        <span>🤖 AI Assistant Active</span>
+        <div class="ai-status">Analyzing 8 ideas</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Dashboard Page -->
+      <div id="dashboard" class="page active">
+        <h1 class="page-title animate__animated animate__fadeInDown">Dashboard</h1>
+
+        <div class="stats">
+          <div class="stat-card ai-enhanced">
+            <div class="stat-glow"></div>
+            <h2>8</h2>
+            <p>Total Ideas</p>
+            <div class="stat-trend up">+12%</div>
+          </div>
+          <div class="stat-card ai-enhanced">
+            <div class="stat-glow"></div>
+            <h2>5</h2>
+            <p>AI-Linked Ideas</p>
+            <div class="stat-trend up">+25%</div>
+          </div>
+          <div class="stat-card ai-enhanced">
+            <div class="stat-glow"></div>
+            <h2>3</h2>
+            <p>Scaled Projects</p>
+            <div class="stat-trend up">+8%</div>
+          </div>
+          <div class="stat-card ai-metric">
+            <div class="stat-glow"></div>
+            <h2>78%</h2>
+            <p>AI Readiness</p>
+            <div class="ai-progress">
+              <div class="ai-progress-bar">
+                <div class="ai-progress-fill" style="width: 78%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Predictions Section -->
+        <div class="ai-predictions animate__animated animate__fadeInUp">
+          <h3>🎯 AI Success Predictions</h3>
+          <div class="prediction-cards">
+            <div class="prediction-card">
+              <div class="prediction-header">
+                <h4>🚀 High Potential</h4>
+                <span class="confidence-badge">92%</span>
+              </div>
+              <div class="prediction-list">
+                <div class="prediction-item">
+                  <span class="idea-name">AI Funding Platform</span>
+                  <div class="success-meter">
+                    <div class="meter-fill" style="width: 89%"></div>
+                  </div>
+                  <span class="success-chance">89%</span>
+                </div>
+                <div class="prediction-item">
+                  <span class="idea-name">Digital Education Hub</span>
+                  <div class="success-meter">
+                    <div class="meter-fill" style="width: 76%"></div>
+                  </div>
+                  <span class="success-chance">76%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-section animate__animated animate__fadeInUp">
+          <h3>Ideas by Category</h3>
+          <div class="charts">
+            <canvas id="barChart"></canvas>
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+
+        <div class="featured-idea ai-enhanced-card animate__animated animate__fadeInUp">
+          <div class="ai-glow-border"></div>
+          <h3>⭐ Featured AI Idea</h3>
+          <h2>Intelligent Funding Match Platform</h2>
+          <p>💡 AI can match township entrepreneurs with investors 3x faster using predictive analytics.</p>
+          <div class="ai-analysis-badge">
+            <span class="ai-score">AI Score: 92%</span>
+            <span class="ai-category">AI & Technology</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Idea Repository Page -->
+      <div id="idea-repo" class="page">
+        <h1 class="animate__animated animate__fadeInDown">Idea Repository</h1>
+        
+        <!-- AI Search & Filter -->
+        <div class="ai-search-container animate__animated animate__fadeInUp">
+          <div class="search-wrapper">
+            <input type="text" id="aiSearch" placeholder="🔍 Ask AI to find ideas... (e.g., 'show scalable AI ideas')">
+            <button class="voice-search-btn" id="voiceSearch">🎤</button>
+          </div>
+          <div class="search-suggestions">
+            <span class="suggestion">"funding ideas"</span>
+            <span class="suggestion">"high scalability"</span>
+            <span class="suggestion">"AI solutions"</span>
+            <span class="suggestion">"social impact"</span>
+          </div>
+        </div>
+
+        <div class="idea-gallery">
+          <!-- Idea 1 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image1.jpg" alt="Idea 1" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Opening Session: Welcome Address by Mponeng Seshea</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 78%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idea 2 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image2.jpg" alt="Idea 2" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Conference Tone and Atmosphere</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 65%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 72%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idea 3 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image4.jpg" alt="Idea 3" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Leading the panel, empowering the future</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 88%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 82%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idea 4 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image7.jpg" alt="Idea 4" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Optimism for the Future</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 72%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idea 5 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image9.jpg" alt="Idea 5" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Encouragement for Transformation and Learning</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 79%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 91%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idea 6 -->
+          <div class="idea-item ai-enhanced-card animate__animated animate__fadeInUp">
+            <div class="idea-image-container">
+              <img src="images/image10.jpg" alt="Idea 6" />
+              <div class="ai-overlay">AI ANALYZED</div>
+            </div>
+            <h3>Boitumelo Mputle – Infrastructure Innovation</h3>
+            <div class="idea-metrics">
+              <div class="metric">
+                <span class="label">AI Potential</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 94%"></div>
+                </div>
+              </div>
+              <div class="metric">
+                <span class="label">Impact Score</span>
+                <div class="score-bar">
+                  <div class="fill" style="width: 87%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Insights Page -->
+      <div id="ai-insights" class="page">
+        <div class="ai-insights-header animate__animated animate__fadeInDown">
+          <h1>AI Insights</h1>
+          <span class="ai-powered-badge">🤖 AI-Powered Analytics</span>
+        </div>
+        
+        <div class="ai-metrics-grid animate__animated animate__fadeInUp">
+          <div class="ai-metric-item">
+            <div class="metric-icon">🚀</div>
+            <div class="metric-value">85%</div>
+            <div class="metric-label">AI Readiness</div>
+            <div class="metric-trend">+5% this month</div>
+          </div>
+          <div class="ai-metric-item">
+            <div class="metric-icon">📈</div>
+            <div class="metric-value">72%</div>
+            <div class="metric-label">Scalability Score</div>
+            <div class="metric-trend">+12% this month</div>
+          </div>
+          <div class="ai-metric-item">
+            <div class="metric-icon">💡</div>
+            <div class="metric-value">68%</div>
+            <div class="metric-label">Innovation Index</div>
+            <div class="metric-trend">+8% this month</div>
+          </div>
+          <div class="ai-metric-item">
+            <div class="metric-icon">🤝</div>
+            <div class="metric-value">81%</div>
+            <div class="metric-label">Stakeholder Match</div>
+            <div class="metric-trend">+15% this month</div>
+          </div>
+        </div>
+
+        <!-- AI Idea Generator -->
+        <div class="ai-idea-generator animate__animated animate__fadeInUp">
+          <h3>🎨 AI Idea Generator</h3>
+          <div class="generator-input">
+            <input type="text" id="ideaPrompt" placeholder="Describe a challenge or opportunity...">
+            <button id="generateIdea" class="glow-button">
+              <span class="btn-text">Generate AI Solution</span>
+              <div class="btn-shine"></div>
+            </button>
+          </div>
+          <div id="aiGeneratedIdeas" class="ai-ideas-container"></div>
+        </div>
+
+        <div class="featured-idea ai-enhanced-card animate__animated animate__fadeInUp">
+          <div class="ai-glow-border"></div>
+          <h3>🤖 Top AI Opportunity</h3>
+          <h2>Intelligent Funding Match Platform</h2>
+          <p>AI can match township entrepreneurs with investors 3x faster using predictive analytics and natural language processing.</p>
+          <div class="ai-analysis-badge">
+            <span class="ai-score">AI Score: 92%</span>
+            <span class="ai-category">AI & Technology</span>
+          </div>
+          <div class="ai-recommendations">
+            <h4>🎯 AI Recommendations:</h4>
+            <ul>
+              <li>Implement ML algorithms for investor matching</li>
+              <li>Use NLP for pitch analysis and optimization</li>
+              <li>Blockchain for transparent fund tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stakeholder Map Page -->
+      <div id="stakeholder-map" class="page">
+        <div class="stakeholder-header animate__animated animate__fadeInDown">
+          <h1>Stakeholder Ecosystem Map</h1>
+          <span class="ai-powered-badge">🤖 AI-Powered Network Analysis</span>
+        </div>
+
+        <!-- Stakeholder Network Visualization -->
+        <div class="stakeholder-network-container animate__animated animate__fadeInUp">
+          <div class="network-controls">
+            <div class="control-group">
+              <button class="control-btn active" data-filter="all">All Stakeholders</button>
+              <button class="control-btn" data-filter="corporate">🏢 Corporate</button>
+              <button class="control-btn" data-filter="investor">💰 Investors</button>
+              <button class="control-btn" data-filter="government">🏛️ Government</button>
+              <button class="control-btn" data-filter="community">👥 Community</button>
+            </div>
+            <div class="search-stakeholders">
+              <input type="text" placeholder="🔍 Search stakeholders..." id="stakeholderSearch">
+            </div>
+          </div>
+
+          <div class="network-visualization">
+            <!-- Central Idea Node -->
+            <div class="central-node" id="centralIdea">
+              <div class="node-content">
+                <h3>Intelligent Funding Platform</h3>
+                <p>AI-Powered Entrepreneur Matching</p>
+                <div class="node-stats">
+                  <span class="stat">🎯 92% Match</span>
+                  <span class="stat">🚀 High Impact</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Corporate Stakeholders -->
+            <div class="stakeholder-group corporate-group" data-type="corporate">
+              <div class="group-label">🏢 Corporate Partners</div>
+              
+              <div class="stakeholder-node corporate" data-id="mtn">
+                <div class="node-content">
+                  <h4>MTN Group</h4>
+                  <p>Mobile Infrastructure & Digital Payments</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Strategic Fit</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 95%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">95% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node corporate" data-id="vodacom">
+                <div class="node-content">
+                  <h4>Vodacom</h4>
+                  <p>Telecommunications & Connectivity</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Strategic Fit</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 88%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">88% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node corporate" data-id="safaricom">
+                <div class="node-content">
+                  <h4>Safaricom</h4>
+                  <p>M-PESA & Financial Services</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Strategic Fit</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 92%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">92% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+            </div>
+
+            <!-- Investor Stakeholders -->
+            <div class="stakeholder-group investor-group" data-type="investor">
+              <div class="group-label">💰 Investors</div>
+              
+              <div class="stakeholder-node investor" data-id="afdb">
+                <div class="node-content">
+                  <h4>African Development Bank</h4>
+                  <p>Development Funding & Grants</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Funding Potential</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 90%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">90% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node investor" data-id="vc4africa">
+                <div class="node-content">
+                  <h4>VC4Africa</h4>
+                  <p>Venture Capital & Startup Funding</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Funding Potential</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 85%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">85% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node investor" data-id="tony-foundation">
+                <div class="node-content">
+                  <h4>Tony Elumelu Foundation</h4>
+                  <p>Entrepreneurship Funding</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Funding Potential</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 87%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">87% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+            </div>
+
+            <!-- Government Stakeholders -->
+            <div class="stakeholder-group government-group" data-type="government">
+              <div class="group-label">🏛️ Government</div>
+              
+              <div class="stakeholder-node government" data-id="au">
+                <div class="node-content">
+                  <h4>AU Commission</h4>
+                  <p>Continental Policy & Coordination</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Policy Alignment</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 82%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">82% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node government" data-id="undp">
+                <div class="node-content">
+                  <h4>UNDP Africa</h4>
+                  <p>Development Programs & Support</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Policy Alignment</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 88%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">88% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+            </div>
+
+            <!-- Community Stakeholders -->
+            <div class="stakeholder-group community-group" data-type="community">
+              <div class="group-label">👥 Community</div>
+              
+              <div class="stakeholder-node community" data-id="andela">
+                <div class="node-content">
+                  <h4>Andela</h4>
+                  <p>Tech Talent Development</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Community Impact</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 91%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">91% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+
+              <div class="stakeholder-node community" data-id="innovation-hub">
+                <div class="node-content">
+                  <h4>Innovation Hubs Network</h4>
+                  <p>Local Ecosystem Partners</p>
+                  <div class="node-metrics">
+                    <div class="metric">
+                      <span class="label">Community Impact</span>
+                      <div class="score-bar">
+                        <div class="fill" style="width: 89%"></div>
+                      </div>
+                    </div>
+                    <div class="match-score">89% Match</div>
+                  </div>
+                </div>
+                <div class="connection-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI-Powered Stakeholder Insights -->
+        <div class="stakeholder-insights animate__animated animate__fadeInUp">
+          <h3>🤖 AI Stakeholder Analysis</h3>
+          <div class="insights-grid">
+            <div class="insight-card">
+              <div class="insight-header">
+                <h4>🎯 Top Strategic Partners</h4>
+                <span class="confidence">94% Confidence</span>
+              </div>
+              <div class="insight-content">
+                <div class="partner-rank">
+                  <div class="rank-item">
+                    <span class="rank">1</span>
+                    <span class="partner-name">MTN Group</span>
+                    <span class="partner-score">95%</span>
+                  </div>
+                  <div class="rank-item">
+                    <span class="rank">2</span>
+                    <span class="partner-name">Safaricom</span>
+                    <span class="partner-score">92%</span>
+                  </div>
+                  <div class="rank-item">
+                    <span class="rank">3</span>
+                    <span class="partner-name">African Development Bank</span>
+                    <span class="partner-score">90%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-header">
+                <h4>📈 Engagement Strategy</h4>
+                <span class="confidence">89% Confidence</span>
+              </div>
+              <div class="insight-content">
+                <ul class="strategy-list">
+                  <li>• Approach corporate partners for pilot funding</li>
+                  <li>• Engage investors for scale-up capital</li>
+                  <li>• Secure government support for policy alignment</li>
+                  <li>• Partner with community for local implementation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-header">
+                <h4>🤝 Recommended Approach</h4>
+                <span class="confidence">91% Confidence</span>
+              </div>
+              <div class="insight-content">
+                <div class="approach-steps">
+                  <div class="step">
+                    <span class="step-number">1</span>
+                    <span class="step-text">Initial meetings with top 3 corporate partners</span>
+                  </div>
+                  <div class="step">
+                    <span class="step-number">2</span>
+                    <span class="step-text">Develop joint pilot proposal</span>
+                  </div>
+                  <div class="step">
+                    <span class="step-number">3</span>
+                    <span class="step-text">Secure initial funding commitment</span>
+                  </div>
+                  <div class="step">
+                    <span class="step-number">4</span>
+                    <span class="step-text">Scale with investor backing</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stakeholder Contact Management -->
+        <div class="contact-management animate__animated animate__fadeInUp">
+          <h3>📞 Contact & Engagement Tracker</h3>
+          <div class="contact-cards">
+            <div class="contact-card">
+              <div class="contact-header">
+                <h4>MTN Group</h4>
+                <span class="engagement-level high">High Engagement</span>
+              </div>
+              <div class="contact-details">
+                <p><strong>Contact:</strong> Innovation Partnerships Director</p>
+                <p><strong>Status:</strong> Initial meeting scheduled</p>
+                <p><strong>Next Step:</strong> Present detailed proposal</p>
+              </div>
+              <div class="contact-actions">
+                <button class="action-btn primary">Log Interaction</button>
+                <button class="action-btn secondary">Schedule Meeting</button>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-header">
+                <h4>African Development Bank</h4>
+                <span class="engagement-level medium">Medium Engagement</span>
+              </div>
+              <div class="contact-details">
+                <p><strong>Contact:</strong> Private Sector Department</p>
+                <p><strong>Status:</strong> Proposal under review</p>
+                <p><strong>Next Step:</strong> Follow up in 2 weeks</p>
+              </div>
+              <div class="contact-actions">
+                <button class="action-btn primary">Log Interaction</button>
+                <button class="action-btn secondary">Schedule Meeting</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="export-report" class="page">
+        <h1 class="animate__animated animate__fadeInDown">Export Report</h1>
+        <p>Generate and download PDF reports here.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Enhanced CHATBOT WIDGET -->
+  <button class="chatbot-button" id="chatbotToggle">
+    <div class="chatbot-pulse"></div>
+    🤖
+  </button>
+
+  <div class="chatbot-container" id="chatbotBox">
+    <div class="chatbot-header">
+      <h4><i class="fas fa-robot"></i> Advanced AI Assistant</h4>
+      <button class="close-chatbot" id="closeChat">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="bot-message">
+        <div class="message-header">
+          <span class="ai-badge">AI</span>
+          <span class="message-time">Just now</span>
+        </div>
+        Hello! I'm your advanced AI assistant. I can analyze ideas, generate insights, and provide strategic recommendations. Try saying "analyze [your idea]" or "generate solution for [challenge]"
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="Ask me anything...">
+      <button id="voiceBtn" class="voice-btn">🎤</button>
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>

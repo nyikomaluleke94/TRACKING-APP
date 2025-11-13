@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Widget</title>
+  <style>
+    /* Chatbot styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-container.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .chatbot-header {
+      background: linear-gradient(90deg, #1a3a5f 0%, #2c5a8f 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .close-chatbot {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #f9f9f9;
+    }
+
+    .bot-message, .user-message {
+      padding: 12px 15px;
+      border-radius: 18px;
+      max-width: 80%;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .bot-message {
+      background: #f0f4f8;
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+    }
+
+    .user-message {
+      background: #1a3a5f;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+    }
+
+    .chatbot-input {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #eee;
+      background: white;
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .chatbot-input button {
+      background: #1a3a5f;
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .chatbot-input button:hover {
+      background: #2c5a8f;
+    }
+
+    .chatbot-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #1a3a5f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-button:hover {
+      transform: scale(1.1);
+      background: #2c5a8f;
+    }
+
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .chatbot-container {
+        width: 90%;
+        right: 5%;
+        height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Your existing page content goes here -->
+
+  <!-- Chatbot Button -->
+  <button class="chatbot-button" id="chatbotToggle">
+    🤖
+  </button>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatbotBox">
+    <div class="chatbot-header">
+      <h4><i class="fas fa-robot"></i> AI Assistant</h4>
+      <button class="close-chatbot" id="closeChat">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="bot-message">
+        Hello! I'm your AI assistant. How can I help you today?
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="Type your message...">
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script>
+    // Chatbot functionality
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotBox = document.getElementById('chatbotBox');
+    const closeChat = document.getElementById('closeChat');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+
+    // Toggle chatbot visibility
+    chatbotToggle.addEventListener('click', () => {
+      chatbotBox.classList.add('active');
+    });
+
+    closeChat.addEventListener('click', () => {
+      chatbotBox.classList.remove('active');
+    });
+
+    // Send message function
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (message === '') return;
+      
+      // Add user message
+      addMessage(message, 'user');
+      chatbotInput.value = '';
+      
+      // Process and generate bot response
+      setTimeout(() => {
+        const response = generateResponse(message);
+        addMessage(response, 'bot');
+      }, 1000);
+    }
+
+    // Add message to chat
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add(`${sender}-message`);
+      messageDiv.textContent = text;
+      chatbotMessages.appendChild(messageDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Generate bot response based on user input
+    function generateResponse(input) {
+      const lowerInput = input.toLowerCase();
+      
+      // Greeting responses
+      if (lowerInput.includes('hello') || lowerInput.includes('hi') || lowerInput.includes('hey')) {
+        return "Hello! How can I assist you today?";
+      }
+      
+      // Help request
+      if (lowerInput.includes('help')) {
+        return "I'm here to help! You can ask me questions about this system or request assistance with specific tasks.";
+      }
+      
+      // Thank you responses
+      if (lowerInput.includes('thank')) {
+        return "You're welcome! Is there anything else I can help you with?";
+      }
+      
+      // Default response
+      return "I understand you're saying: '" + input + "'. You can customize my responses to fit your specific project needs.";
+    }
+
+    // Event listeners for sending messages
+    sendBtn.addEventListener('click', sendMessage);
+    chatbotInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
+
+  <!-- Font Awesome for icons (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</body>
+</html>
